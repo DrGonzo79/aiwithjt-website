@@ -43,8 +43,13 @@ module.exports = async function handler(req, res) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      return res.status(response.status).json({ error: errorData.message || 'Failed to subscribe.' });
+      const errorText = await response.text();
+      return res.status(response.status).json({
+        error: 'Beehiiv API error',
+        status: response.status,
+        detail: errorText,
+        pubId: PUB_ID ? PUB_ID.substring(0, 8) + '...' : 'missing'
+      });
     }
 
     return res.status(200).json({ success: true, message: 'Subscribed successfully.' });
