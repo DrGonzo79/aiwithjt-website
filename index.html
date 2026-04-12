@@ -252,6 +252,13 @@
 
     .email-form button:hover { background: #0044dd; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,85,255,0.25); }
 
+    .form-message {
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      min-height: 20px;
+    }
+
     .capture-privacy {
       font-size: 12px;
       color: var(--gray);
@@ -912,10 +919,11 @@
           3. Replace this form with your Beehiiv embed code
           OR replace the action URL with your Beehiiv subscribe endpoint
         -->
-        <form class="email-form" onsubmit="handleSubscribe(event)">
-          <input type="text" placeholder="First name" required autocomplete="given-name">
+        <form class="email-form subscribe-form">
+          <input type="text" placeholder="First name" autocomplete="given-name">
           <input type="email" placeholder="Your email address" required autocomplete="email">
           <button type="submit">Send Me the Free Kit →</button>
+          <p class="form-message"></p>
         </form>
 
         <div class="capture-privacy">No spam, ever. Unsubscribe in one click.</div>
@@ -1069,9 +1077,10 @@
             </div>
           </div>
 
-          <form class="kit-cta-form" onsubmit="handleSubscribe(event)">
+          <form class="kit-cta-form subscribe-form">
             <input type="email" placeholder="Your email address" required>
             <button type="submit">Get It Free →</button>
+            <p class="form-message"></p>
           </form>
         </div>
 
@@ -1176,9 +1185,10 @@
       <h2>Stop doing it <span class="blue">manually</span>.</h2>
       <p>Join thousands of solopreneurs learning to work smarter with AI.</p>
 
-      <form class="final-cta-form" onsubmit="handleSubscribe(event)">
+      <form class="final-cta-form subscribe-form">
         <input type="email" placeholder="Enter your email" required>
         <button type="submit">Get the Free Kit →</button>
+        <p class="form-message"></p>
       </form>
     </div>
   </section>
@@ -1207,12 +1217,45 @@
     //   https://www.beehiiv.com/subscribe/[your-pub-id]
     // or an embed script you paste in place of these forms.
 
-    function handleSubscribe(e) {
-      e.preventDefault();
-      const form = e.target;
-      const email = form.querySelector('input[type="email"]').value;
-      window.location.href = `https://aiwithjustin.beehiiv.com/subscribe?email=${encodeURIComponent(email)}`;
-    }
+    document.querySelectorAll('.subscribe-form').forEach(form => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const emailInput = form.querySelector('input[type="email"]');
+        const messageEl = form.querySelector('.form-message');
+        const button = form.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
+
+        button.disabled = true;
+        button.textContent = 'Subscribing...';
+        messageEl.textContent = '';
+        messageEl.style.color = 'inherit';
+
+        try {
+          const res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: emailInput.value })
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            messageEl.textContent = 'Success! Check your inbox.';
+            messageEl.style.color = 'green';
+            emailInput.value = '';
+          } else {
+            throw new Error(data.error || 'Subscription failed.');
+          }
+        } catch (error) {
+          messageEl.textContent = error.message;
+          messageEl.style.color = 'red';
+        } finally {
+          button.disabled = false;
+          button.textContent = originalText;
+        }
+      });
+    });
   </script>
 
 </body>
