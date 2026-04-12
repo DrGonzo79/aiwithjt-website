@@ -9,7 +9,14 @@ module.exports = async function handler(req, res) {
     const { email, first_name } = body;
 
     if (!email) {
-      return res.status(400).json({ error: 'Email is required' });
+      return res.status(400).json({
+        error: 'Email is required',
+        debug: {
+          bodyType: typeof req.body,
+          body: req.body,
+          contentType: req.headers['content-type']
+        }
+      });
     }
 
     const API_KEY = process.env.BEEHIIV_API_KEY;
