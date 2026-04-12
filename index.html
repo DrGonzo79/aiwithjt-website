@@ -1211,17 +1211,7 @@
       e.preventDefault();
       const form = e.target;
       const email = form.querySelector('input[type="email"]').value;
-
-      // TEMPORARY: shows success message until Beehiiv is wired up
-      const btn = form.querySelector('button');
-      btn.textContent = '✓ Check your inbox!';
-      btn.style.background = '#059669';
-      btn.disabled = true;
-
-      // TODO: Replace with Beehiiv API call or redirect:
-      // window.location.href = `https://www.beehiiv.com/subscribe/YOUR_PUB_ID?email=${encodeURIComponent(email)}`;
-
-      console.log('Subscribe:', email); // remove after wiring Beehiiv
+      window.location.href = `https://aiwithjustin.beehiiv.com/?modal=signup&email=${encodeURIComponent(email)}`;
     }
   </script>
 
