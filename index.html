@@ -912,13 +912,6 @@
           The <strong>5 AI tools</strong> I'd give every solopreneur to save 10 hours/week — sent straight to your inbox.
         </div>
 
-        <!--
-          BEEHIIV INTEGRATION:
-          1. Sign up at beehiiv.com → create a publication
-          2. Go to Settings → Forms → Embed form
-          3. Replace this form with your Beehiiv embed code
-          OR replace the action URL with your Beehiiv subscribe endpoint
-        -->
         <form class="email-form subscribe-form">
           <input type="text" placeholder="First name" autocomplete="given-name">
           <input type="email" placeholder="Your email address" required autocomplete="email">
@@ -1211,45 +1204,42 @@
   </footer>
 
   <script>
-    // ── EMAIL FORM HANDLER ─────────────────────────────────────
-    // Replace this with your Beehiiv form action URL once you sign up.
-    // Beehiiv will give you an endpoint like:
-    //   https://www.beehiiv.com/subscribe/[your-pub-id]
-    // or an embed script you paste in place of these forms.
-
     document.querySelectorAll('.subscribe-form').forEach(form => {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const emailInput = form.querySelector('input[type="email"]');
-        const messageEl = form.querySelector('.form-message');
-        const button = form.querySelector('button[type="submit"]');
+        const nameInput  = form.querySelector('input[type="text"]');
+        const messageEl  = form.querySelector('.form-message');
+        const button     = form.querySelector('button[type="submit"]');
         const originalText = button.textContent;
 
         button.disabled = true;
         button.textContent = 'Subscribing...';
         messageEl.textContent = '';
-        messageEl.style.color = 'inherit';
 
         try {
-          const res = await fetch('/api/subscribe', {
+          const payload = { email: emailInput.value };
+          if (nameInput && nameInput.value) payload.first_name = nameInput.value;
+
+          const res  = await fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: emailInput.value })
+            body: JSON.stringify(payload)
           });
 
           const data = await res.json();
 
           if (res.ok) {
-            messageEl.textContent = 'Success! Check your inbox.';
-            messageEl.style.color = 'green';
-            emailInput.value = '';
+            messageEl.textContent = '✓ Check your inbox for the Starter Kit!';
+            messageEl.style.color = '#059669';
+            form.reset();
           } else {
-            throw new Error(data.error || 'Subscription failed.');
+            throw new Error(data.error || 'Something went wrong — please try again.');
           }
-        } catch (error) {
-          messageEl.textContent = error.message;
-          messageEl.style.color = 'red';
+        } catch (err) {
+          messageEl.textContent = err.message;
+          messageEl.style.color = '#dc2626';
         } finally {
           button.disabled = false;
           button.textContent = originalText;
