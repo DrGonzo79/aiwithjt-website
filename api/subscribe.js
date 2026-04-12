@@ -1,6 +1,5 @@
 // api/subscribe.js
-export default async function handler(req, res) {
-  // Reject anything that isn't a POST request
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -13,6 +12,10 @@ export default async function handler(req, res) {
 
   const API_KEY = process.env.BEEHIIV_API_KEY;
   const PUB_ID = process.env.BEEHIIV_PUB_ID;
+
+  if (!API_KEY || !PUB_ID) {
+    return res.status(500).json({ error: 'Server configuration error.' });
+  }
 
   try {
     const response = await fetch(`https://api.beehiiv.com/v2/publications/${PUB_ID}/subscriptions`, {
