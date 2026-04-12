@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI with Justin — Enterprise AI, Made Simple</title>
+  <meta name="description" content="Learn how to use AI tools like Claude Code and OpenClaw to save time and grow your business — from a Microsoft Certified AI Engineer who makes it simple.">
+  <meta property="og:image" content="https://aiwithjt.com/images/og-image.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <meta property="og:title" content="AI with Justin — Enterprise AI, Made Simple">
+  <meta property="og:description" content="Learn how to use AI tools like Claude Code and OpenClaw to save time and grow your business.">
+  <meta property="og:url" content="https://aiwithjt.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black:   #0a0a1a;
+      --blue:    #0055ff;
+      --blue-lt: #e8f0ff;
+      --gray:    #6b7280;
+      --border:  #e5e7eb;
+      --bg-alt:  #f8f9fc;
+      --white:   #ffffff;
+      --radius:  12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── UTILITY ─────────────────────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      letter-spacing: 0.2px;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+    }
+    .btn-primary:hover { background: #0044dd; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,85,255,0.25); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--blue);
+      border: 2px solid var(--blue);
+    }
+    .btn-secondary:hover { background: var(--blue-lt); }
+
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+
+    .nav-cta {
+      padding: 10px 22px;
+      font-size: 14px;
+    }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue-lt);
+      border: 1px solid rgba(0,85,255,0.2);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.5px;
+      margin-bottom: 32px;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 7vw, 80px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2.5px;
+      color: var(--black);
+      max-width: 800px;
+      margin: 0 auto 24px;
+    }
+
+    .hero h1 .blue { color: var(--blue); }
+
+    .hero p {
+      font-size: 20px;
+      color: var(--gray);
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    /* ── EMAIL CAPTURE ───────────────────────────────────────── */
+    .capture-box {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .capture-box .capture-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .capture-box .capture-sub {
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    .capture-box .capture-sub strong {
+      color: var(--black);
+    }
+
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .email-form input[type="text"],
+    .email-form input[type="email"] {
+      padding: 14px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--black);
+      background: white;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .email-form input:focus { border-color: var(--blue); }
+
+    .email-form button {
+      width: 100%;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      background: var(--blue);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.2px;
+    }
+
+    .email-form button:hover { background: #0044dd; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,85,255,0.25); }
+
+    .capture-privacy {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .magnets {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .magnet-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray);
+    }
+
+    .magnet-item .check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #d1fae5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #059669;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    /* ── SOCIAL PROOF BAR ────────────────────────────────────── */
+    .proof-bar {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proof-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray);
+    }
+
+    .proof-item .proof-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .proof-icon.kpmg { background: #003087; color: white; font-size: 11px; font-weight: 900; letter-spacing: 1px; }
+    .proof-icon.ms   { background: #00a4ef; color: white; font-size: 11px; font-weight: 900; }
+    .proof-icon.yt   { background: #ff0000; color: white; font-size: 16px; }
+
+    /* ── ABOUT SECTION ───────────────────────────────────────── */
+    .about {
+      padding: 100px 0;
+      background: var(--bg-alt);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-photo {
+      background: linear-gradient(135deg, var(--blue-lt) 0%, #e0e7ff 100%);
+      border-radius: 20px;
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0,85,255,0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-photo .photo-placeholder-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    /* Replace .about-photo with this when you have a real photo:
+       <img src="justin.jpg" alt="Justin" style="width:100%;height:100%;object-fit:cover;"> */
+
+    .about-photo .accent-chip {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .about-content h2 {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      font-size: 17px;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .about-content p strong { color: var(--black); font-weight: 700; }
+
+    .credentials {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .credential {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .credential-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .credential-text { font-size: 14px; font-weight: 600; color: var(--black); }
+    .credential-sub  { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+    /* ── WHAT YOU'LL LEARN ───────────────────────────────────── */
+    .learn {
+      padding: 100px 0;
+    }
+
+    .learn-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .learn-header h2 {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+    }
+
+    .learn-header p {
+      font-size: 18px;
+      color: var(--gray);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pillar {
+      padding: 32px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.2s;
+    }
+
+    .pillar:hover {
+      border-color: var(--blue);
+      box-shadow: 0 8px 32px rgba(0,85,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    .pillar-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--blue-lt);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .pillar h3 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+
+    .pillar p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ── FREE KIT SECTION ────────────────────────────────────── */
+    .kit {
+      padding: 100px 0;
+      background: var(--black);
+      color: white;
+    }
+
+    .kit-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .kit-content .section-label { color: #60a5fa; }
+
+    .kit-content h2 {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .kit-content p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .kit-includes {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .kit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .kit-item .ki-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0,85,255,0.3);
+      border: 1px solid rgba(0,85,255,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #60a5fa;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-weight: 900;
+    }
+
+    .kit-mockup {
+      background: linear-gradient(135deg, #1a1a3e 0%, #0d1b3e 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kit-mockup::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(0,85,255,0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .kit-mockup-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #60a5fa;
+      margin-bottom: 24px;
+    }
+
+    .kit-tool {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .kit-tool-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue), #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .kit-tool-name { font-size: 15px; font-weight: 700; color: white; }
+    .kit-tool-desc { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+    .kit-cta-form {
+      display: flex;
+      gap: 12px;
+      margin-top: 0;
+    }
+
+    .kit-cta-form input {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .kit-cta-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .kit-cta-form input:focus { border-color: var(--blue); }
+
+    .kit-cta-form button {
+      padding: 14px 24px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .kit-cta-form button:hover { background: #0044dd; }
+
+    /* ── LATEST VIDEOS ───────────────────────────────────────── */
+    .videos {
+      padding: 100px 0;
+      background: var(--bg-alt);
+    }
+
+    .videos-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+
+    .videos-header h2 {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .video-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .video-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+
+    .video-thumb {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #0d1b3e, #1a1a3e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-thumb .yt-play {
+      width: 52px;
+      height: 52px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .video-thumb .video-label {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .video-info {
+      padding: 20px;
+    }
+
+    .video-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .video-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -0.2px;
+    }
+
+    .video-meta {
+      font-size: 13px;
+      color: var(--gray);
+      margin-top: 8px;
+    }
+
+    /* ── FINAL CTA ───────────────────────────────────────────── */
+    .final-cta {
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta h2 .blue { color: var(--blue); }
+
+    .final-cta p {
+      font-size: 18px;
+      color: var(--gray);
+      margin-bottom: 40px;
+    }
+
+    .final-cta-form {
+      display: flex;
+      gap: 12px;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .final-cta-form input {
+      flex: 1;
+      padding: 16px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .final-cta-form input:focus { border-color: var(--blue); }
+
+    .final-cta-form button {
+      padding: 16px 28px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .final-cta-form button:hover { background: #0044dd; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,85,255,0.25); }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .footer-logo span { color: var(--blue); }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--black); }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--gray);
+      width: 100%;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 60px 0 48px; }
+      .about-grid, .kit-inner { grid-template-columns: 1fr; gap: 40px; }
+      .pillars { grid-template-columns: 1fr; }
+      .videos-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 40px; }
+      .final-cta h2 { font-size: 36px; }
+      .final-cta-form, .kit-cta-form { flex-direction: column; }
+      .about-photo { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ───────────────────────────────────────────────── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">AI with <span>Justin</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#learn">What You'll Learn</a></li>
+        <li><a href="https://youtube.com/@AIwithJustin" target="_blank">YouTube</a></li>
+        <li><a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></li>
+      </ul>
+      <a href="#kit" class="btn btn-primary nav-cta">Free AI Starter Kit</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Microsoft Certified AI Engineer · Enterprise Consultant
+      </div>
+      <h1>Enterprise AI, Made <span class="blue">Simple</span> for Your Business</h1>
+      <p>Learn how to use AI tools like Claude Code and OpenClaw to save 10+ hours a week — no technical background needed.</p>
+
+      <div class="capture-box">
+        <div class="capture-title">Get the Free AI Starter Kit</div>
+        <div class="capture-sub">
+          The <strong>5 AI tools</strong> I'd give every solopreneur to save 10 hours/week — sent straight to your inbox.
+        </div>
+
+        <!--
+          BEEHIIV INTEGRATION:
+          1. Sign up at beehiiv.com → create a publication
+          2. Go to Settings → Forms → Embed form
+          3. Replace this form with your Beehiiv embed code
+          OR replace the action URL with your Beehiiv subscribe endpoint
+        -->
+        <form class="email-form" onsubmit="handleSubscribe(event)">
+          <input type="text" placeholder="First name" required autocomplete="given-name">
+          <input type="email" placeholder="Your email address" required autocomplete="email">
+          <button type="submit">Send Me the Free Kit →</button>
+        </form>
+
+        <div class="capture-privacy">No spam, ever. Unsubscribe in one click.</div>
+
+        <div class="magnets">
+          <div class="magnet-item">
+            <div class="check">✓</div>
+            5 tools breakdown
+          </div>
+          <div class="magnet-item">
+            <div class="check">✓</div>
+            Setup guides
+          </div>
+          <div class="magnet-item">
+            <div class="check">✓</div>
+            Weekly AI tips
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROOF BAR ──────────────────────────────────────────── -->
+  <div class="proof-bar">
+    <div class="container">
+      <div class="proof-bar-inner">
+        <div class="proof-item">
+          <div class="proof-icon ms" style="background:#0a0a1a;font-size:16px;">🏢</div>
+          Enterprise Technology Consultant
+        </div>
+        <div class="proof-item">
+          <div class="proof-icon ms">AI</div>
+          Microsoft Certified AI Engineer
+        </div>
+        <div class="proof-item">
+          <div class="proof-icon yt">▶</div>
+          Practical tutorials for non-technical founders
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ──────────────────────────────────────────────── -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-photo">
+          <img src="images/justin.jpg" alt="Justin" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:20px;">
+          <div class="accent-chip">
+            👋 Hey, I'm Justin
+          </div>
+        </div>
+
+        <div class="about-content">
+          <span class="section-label">About Justin</span>
+          <h2>The translator between enterprise AI and your business</h2>
+          <p>
+            I work in enterprise technology consulting on cutting-edge AI and data solutions for some of the world's largest organizations. I'm also a <strong>Microsoft Certified AI Engineer</strong>.
+          </p>
+          <p>
+            But here's what I kept seeing: the same powerful tools being used at the enterprise level — tools that could save small business owners and solopreneurs <strong>hours every single week</strong> — were sitting unused because nobody explained them in plain English.
+          </p>
+          <p>
+            So I built this channel to be the bridge. No jargon. No hype. Just practical walkthroughs that work for real businesses.
+          </p>
+
+          <div class="credentials">
+            <div class="credential">
+              <div class="credential-icon" style="background:#0a0a1a;font-size:18px;">🏢</div>
+              <div>
+                <div class="credential-text">Enterprise Technology Consultant</div>
+                <div class="credential-sub">AI & Data — cutting-edge enterprise AI solutions</div>
+              </div>
+            </div>
+            <div class="credential">
+              <div class="credential-icon" style="background:#00a4ef;font-size:13px;font-weight:900;color:white;">MS</div>
+              <div>
+                <div class="credential-text">Microsoft Certified: AI Engineer Associate</div>
+                <div class="credential-sub">Azure AI solutions &amp; cognitive services</div>
+              </div>
+            </div>
+            <div class="credential">
+              <div class="credential-icon" style="background:#ff0000;font-size:16px;">▶</div>
+              <div>
+                <div class="credential-text">AI with Justin — YouTube</div>
+                <div class="credential-sub">Practical AI tutorials for small business owners</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT YOU'LL LEARN ──────────────────────────────────── -->
+  <section class="learn" id="learn">
+    <div class="container">
+      <div class="learn-header">
+        <span class="section-label">What You'll Learn</span>
+        <h2>AI that actually works for your business</h2>
+        <p>No theory. No hype. Just tools and workflows you can use this week.</p>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon">⚡</div>
+          <h3>Get Started Fast</h3>
+          <p>Step-by-step walkthroughs for setting up Claude Code, OpenClaw, and other AI tools — even if you've never written a line of code.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⏱️</div>
+          <h3>Save 10+ Hours a Week</h3>
+          <p>Real workflows for automating emails, proposals, customer support, content creation, and admin work that's eating your time.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🏢</div>
+          <h3>Enterprise Insights, Simplified</h3>
+          <p>What Fortune 500 companies are doing with AI — translated into practical strategies you can implement in your business today.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FREE KIT ───────────────────────────────────────────── -->
+  <section class="kit" id="kit">
+    <div class="container">
+      <div class="kit-inner">
+        <div class="kit-content">
+          <span class="section-label">Free Resource</span>
+          <h2>The AI Starter Kit</h2>
+          <p>
+            The 5 AI tools I'd give every solopreneur — with setup guides and the exact workflows I use to save 10+ hours a week.
+          </p>
+
+          <div class="kit-includes">
+            <div class="kit-item">
+              <div class="ki-icon">✓</div>
+              The 5 tools ranked by time saved (with honest trade-offs)
+            </div>
+            <div class="kit-item">
+              <div class="ki-icon">✓</div>
+              Step-by-step setup for each tool — zero tech background required
+            </div>
+            <div class="kit-item">
+              <div class="ki-icon">✓</div>
+              Copy-paste prompts that work for emails, proposals &amp; content
+            </div>
+            <div class="kit-item">
+              <div class="ki-icon">✓</div>
+              The one AI workflow I wish I'd started with on day one
+            </div>
+          </div>
+
+          <form class="kit-cta-form" onsubmit="handleSubscribe(event)">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit">Get It Free →</button>
+          </form>
+        </div>
+
+        <div class="kit-mockup">
+          <div class="kit-mockup-title">Inside the AI Starter Kit</div>
+
+          <div class="kit-tool">
+            <div class="kit-tool-icon">🤖</div>
+            <div>
+              <div class="kit-tool-name">Claude (Anthropic)</div>
+              <div class="kit-tool-desc">The AI assistant that actually reasons — best for writing, analysis &amp; complex tasks</div>
+            </div>
+          </div>
+
+          <div class="kit-tool">
+            <div class="kit-tool-icon">💻</div>
+            <div>
+              <div class="kit-tool-name">Claude Code</div>
+              <div class="kit-tool-desc">Build tools, automations &amp; websites with AI — no coding experience needed</div>
+            </div>
+          </div>
+
+          <div class="kit-tool">
+            <div class="kit-tool-icon">🦅</div>
+            <div>
+              <div class="kit-tool-name">OpenClaw</div>
+              <div class="kit-tool-desc">AI that browses the web and takes action on your behalf</div>
+            </div>
+          </div>
+
+          <div class="kit-tool">
+            <div class="kit-tool-icon">⚡</div>
+            <div>
+              <div class="kit-tool-name">+ 2 More Tools</div>
+              <div class="kit-tool-desc">Inside the free kit — specific to your business type</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LATEST VIDEOS ──────────────────────────────────────── -->
+  <section class="videos" id="videos">
+    <div class="container">
+      <div class="videos-header">
+        <div>
+          <span class="section-label">Latest Videos</span>
+          <h2>Start watching</h2>
+        </div>
+        <a href="https://youtube.com/@AIwithJustin" target="_blank" class="btn btn-secondary">View All →</a>
+      </div>
+
+      <div class="videos-grid">
+        <!--
+          REPLACE THESE CARDS with real YouTube embeds or links as you publish.
+          For each video: update href, video-label, video-tag, video-title, video-meta
+        -->
+        <a href="https://youtube.com/@AIwithJustin" target="_blank" class="video-card">
+          <div class="video-thumb">
+            <div class="yt-play">▶</div>
+            <div class="video-label">Getting Started</div>
+          </div>
+          <div class="video-info">
+            <div class="video-tag">Claude Code</div>
+            <div class="video-title">I'm Not Technical — Should I Use Claude Code? (Honest Answer)</div>
+            <div class="video-meta">Coming soon</div>
+          </div>
+        </a>
+
+        <a href="https://youtube.com/@AIwithJustin" target="_blank" class="video-card">
+          <div class="video-thumb">
+            <div class="yt-play">▶</div>
+            <div class="video-label">Productivity</div>
+          </div>
+          <div class="video-info">
+            <div class="video-tag">Workflows</div>
+            <div class="video-title">How I Saved 10 Hours/Week Using AI in My Business (Step by Step)</div>
+            <div class="video-meta">Coming soon</div>
+          </div>
+        </a>
+
+        <a href="https://youtube.com/@AIwithJustin" target="_blank" class="video-card">
+          <div class="video-thumb">
+            <div class="yt-play">▶</div>
+            <div class="video-label">Tool Breakdown</div>
+          </div>
+          <div class="video-info">
+            <div class="video-tag">OpenClaw</div>
+            <div class="video-title">OpenClaw Explained in Plain English — What It Actually Does</div>
+            <div class="video-meta">Coming soon</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ──────────────────────────────────────────── -->
+  <section class="final-cta">
+    <div class="container">
+      <span class="section-label">Get Started</span>
+      <h2>Stop doing it <span class="blue">manually</span>.</h2>
+      <p>Join thousands of solopreneurs learning to work smarter with AI.</p>
+
+      <form class="final-cta-form" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Get the Free Kit →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#" class="footer-logo">AI with <span>Justin</span></a>
+        <ul class="footer-links">
+          <li><a href="https://youtube.com/@AIwithJustin" target="_blank">YouTube</a></li>
+          <li><a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></li>
+          <li><a href="mailto:hello@aiwithjt.com">Contact</a></li>
+        </ul>
+        <div class="footer-copy">
+          © 2026 AI with Justin · <a href="#" style="color:inherit;">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── EMAIL FORM HANDLER ─────────────────────────────────────
+    // Replace this with your Beehiiv form action URL once you sign up.
+    // Beehiiv will give you an endpoint like:
+    //   https://www.beehiiv.com/subscribe/[your-pub-id]
+    // or an embed script you paste in place of these forms.
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.querySelector('input[type="email"]').value;
+
+      // TEMPORARY: shows success message until Beehiiv is wired up
+      const btn = form.querySelector('button');
+      btn.textContent = '✓ Check your inbox!';
+      btn.style.background = '#059669';
+      btn.disabled = true;
+
+      // TODO: Replace with Beehiiv API call or redirect:
+      // window.location.href = `https://www.beehiiv.com/subscribe/YOUR_PUB_ID?email=${encodeURIComponent(email)}`;
+
+      console.log('Subscribe:', email); // remove after wiring Beehiiv
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OG Image — AI with Justin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #555;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      gap: 16px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .instructions {
+      background: #222;
+      color: #aaa;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .instructions strong { color: white; }
+
+    /* ── CANVAS: exactly 1200×630 ── */
+    .og {
+      width: 1200px;
+      height: 630px;
+      position: relative;
+      overflow: hidden;
+      background: #080812;
+      flex-shrink: 0;
+    }
+
+    /* Grid overlay */
+    .og-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,85,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,85,255,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Blue glow top-left */
+    .og-glow-tl {
+      position: absolute;
+      top: -120px; left: -80px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(0,85,255,0.22) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+
+    /* Subtle glow bottom-right behind photo */
+    .og-glow-br {
+      position: absolute;
+      bottom: -60px; right: 200px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,85,255,0.12) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+
+    /* Photo — right side, bottom-anchored */
+    .og-photo {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      width: 520px;
+      object-fit: cover;
+      object-position: top center;
+      /* Fade left edge into background */
+      mask-image: linear-gradient(to right, transparent 0%, black 22%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 22%);
+    }
+
+    /* Gradient overlay so text stays readable */
+    .og-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        #080812 0%,
+        #080812 38%,
+        rgba(8,8,18,0.5) 62%,
+        transparent 100%
+      );
+    }
+
+    /* Left accent bar */
+    .og-bar {
+      position: absolute;
+      left: 64px;
+      top: 72px;
+      bottom: 72px;
+      width: 5px;
+      background: linear-gradient(180deg, #0055ff, rgba(0,85,255,0.2));
+      border-radius: 3px;
+    }
+
+    /* Text content */
+    .og-content {
+      position: absolute;
+      left: 88px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+
+    .og-eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #6b9fff;
+      margin-bottom: 18px;
+    }
+
+    .og-title {
+      font-size: 82px;
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -3px;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .og-title .blue { color: #4d8fff; }
+
+    .og-sub {
+      font-size: 24px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: -0.3px;
+      margin-bottom: 36px;
+      line-height: 1.4;
+      max-width: 420px;
+    }
+
+    .og-url {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,85,255,0.15);
+      border: 1px solid rgba(0,85,255,0.35);
+      border-radius: 100px;
+      padding: 10px 22px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #6b9fff;
+      letter-spacing: 0.5px;
+    }
+
+    .og-url .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0055ff;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; }
+      50% { opacity:0.3; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="instructions">
+    <strong>How to export:</strong>
+    Set browser zoom to 100% (Cmd+0) → right-click the image below → "Take Screenshot" or use
+    <strong>Cmd+Shift+4</strong> and drag to select exactly the dark card → save as <strong>og-image.jpg</strong>
+    and drop in the <strong>images/</strong> folder. The canvas is exactly 1200×630px.
+  </div>
+
+  <div class="og">
+    <div class="og-grid"></div>
+    <div class="og-glow-tl"></div>
+    <div class="og-glow-br"></div>
+
+    <!-- Your photo — bottom-anchored on the right -->
+    <img class="og-photo" src="justin.JPG" alt="Justin">
+
+    <!-- Gradient fade so text stays crisp -->
+    <div class="og-fade"></div>
+
+    <!-- Left accent bar -->
+    <div class="og-bar"></div>
+
+    <!-- Text -->
+    <div class="og-content">
+      <div class="og-eyebrow">Microsoft Certified AI Engineer</div>
+      <div class="og-title">
+        AI with<br>
+        <span class="blue">Justin</span>
+      </div>
+      <div class="og-sub">Enterprise AI, made simple for your business</div>
+      <div class="og-url">
+        <span class="dot"></span>
+        aiwithjt.com
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
