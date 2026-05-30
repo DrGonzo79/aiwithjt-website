@@ -180,7 +180,7 @@
   <div class="container">
     <span><b>Microsoft Certified</b> AI Engineer</span>
     <span><b>Enterprise</b> technology consultant</span>
-    <span><b>U.S. Marine Corps</b> veteran</span>
+    <span><b>U.S. Marine</b> veteran</span>
     <span>Builds AI <b>in public</b></span>
   </div>
 </div>
@@ -279,23 +279,6 @@
   </div>
 </footer>
 
-<script>
-  document.getElementById('yr').textContent = new Date().getFullYear();
-  document.querySelectorAll('form.signup').forEach(function(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var data = new FormData(form);
-      fetch(form.action, { method:'POST', body:data, mode:'no-cors' }).finally(function(){
-        var card = form.closest('.formcard');
-        if(card){
-          card.querySelector('h3').textContent = "You're in. Check your inbox ✉";
-          card.querySelector('p').textContent = "The guide is on its way — look for an email from justin@aiwithjt.com.";
-          form.style.display='none';
-          var c = card.querySelector('.consent'); if(c) c.style.display='none';
-        } else { form.innerHTML = "<p style='color:#fff'>You're in — check your inbox ✉</p>"; }
-      });
-    });
-  });
-</script>
+<script src="/js/app.js" defer></script>
 </body>
 </html>
