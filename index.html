@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI with Justin — Enterprise AI, Made Simple</title>
-  <meta name="description" content="Learn how to use AI tools like Claude Code and OpenClaw to save time and grow your business — from a Microsoft Certified AI Engineer who makes it simple.">
+  <title>AI with Justin — Go from AI-Curious to AI-Capable</title>
+  <meta name="description" content="Free field guide: the 4-rung ladder for going from 'I've heard of AI' to building things that work for you. Plain English, every prompt included — from a Microsoft Certified AI Engineer and Marine veteran.">
   <meta property="og:image" content="https://aiwithjt.com/images/og-image.png">
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-  <meta property="og:title" content="AI with Justin — Enterprise AI, Made Simple">
-  <meta property="og:description" content="Learn how to use AI tools like Claude Code and OpenClaw to save time and grow your business.">
+  <meta property="og:title" content="AI with Justin — Go from AI-Curious to AI-Capable">
+  <meta property="og:description" content="The free 4-rung ladder for going from 'I've heard of AI' to building things that work for you.">
   <meta property="og:url" content="https://aiwithjt.com">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
@@ -16,1237 +16,286 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --black:   #0a0a1a;
-      --blue:    #0055ff;
-      --blue-lt: #e8f0ff;
-      --gray:    #6b7280;
-      --border:  #e5e7eb;
-      --bg-alt:  #f8f9fc;
-      --white:   #ffffff;
-      --radius:  12px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--black);
-      background: var(--white);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── UTILITY ─────────────────────────────────────────────── */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s ease;
-      letter-spacing: 0.2px;
-    }
-
-    .btn-primary {
-      background: var(--blue);
-      color: white;
-    }
-    .btn-primary:hover { background: #0044dd; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,85,255,0.25); }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--blue);
-      border: 2px solid var(--blue);
-    }
-    .btn-secondary:hover { background: var(--blue-lt); }
-
-    .section-label {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 16px;
-    }
-
-    /* ── NAV ─────────────────────────────────────────────────── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 68px;
-    }
-
-    .nav-logo {
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--black);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
-
-    .nav-logo span { color: var(--blue); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--gray);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--black); }
-
-    .nav-cta {
-      padding: 10px 22px;
-      font-size: 14px;
-    }
-
-    /* ── HERO ────────────────────────────────────────────────── */
-    .hero {
-      padding: 100px 0 80px;
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--blue-lt);
-      border: 1px solid rgba(0,85,255,0.2);
-      border-radius: 100px;
-      padding: 8px 20px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--blue);
-      letter-spacing: 0.5px;
-      margin-bottom: 32px;
-    }
-
-    .hero-badge .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--blue);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .hero h1 {
-      font-size: clamp(48px, 7vw, 80px);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -2.5px;
-      color: var(--black);
-      max-width: 800px;
-      margin: 0 auto 24px;
-    }
-
-    .hero h1 .blue { color: var(--blue); }
-
-    .hero p {
-      font-size: 20px;
-      color: var(--gray);
-      max-width: 540px;
-      margin: 0 auto 48px;
-      line-height: 1.65;
-      font-weight: 400;
-    }
-
-    /* ── EMAIL CAPTURE ───────────────────────────────────────── */
-    .capture-box {
-      background: var(--bg-alt);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    .capture-box .capture-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--black);
-      margin-bottom: 6px;
-      letter-spacing: -0.3px;
-    }
-
-    .capture-box .capture-sub {
-      font-size: 14px;
-      color: var(--gray);
-      margin-bottom: 24px;
-    }
-
-    .capture-box .capture-sub strong {
-      color: var(--black);
-    }
-
-    .email-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .email-form input[type="text"],
-    .email-form input[type="email"] {
-      padding: 14px 18px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 15px;
-      font-family: inherit;
-      color: var(--black);
-      background: white;
-      transition: border-color 0.2s;
-      outline: none;
-    }
-
-    .email-form input:focus { border-color: var(--blue); }
-
-    .email-form button {
-      width: 100%;
-      padding: 16px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 700;
-      background: var(--blue);
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 0.2px;
-    }
-
-    .email-form button:hover { background: #0044dd; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,85,255,0.25); }
-
-    .form-message {
-      font-size: 13px;
-      font-weight: 600;
-      text-align: center;
-      min-height: 20px;
-    }
-
-    .capture-privacy {
-      font-size: 12px;
-      color: var(--gray);
-      margin-top: 12px;
-      text-align: center;
-    }
-
-    .magnets {
-      display: flex;
-      gap: 16px;
-      margin-top: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .magnet-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--gray);
-    }
-
-    .magnet-item .check {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #d1fae5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      color: #059669;
-      font-weight: 900;
-      flex-shrink: 0;
-    }
-
-    /* ── SOCIAL PROOF BAR ────────────────────────────────────── */
-    .proof-bar {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .proof-bar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
-
-    .proof-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--gray);
-    }
-
-    .proof-item .proof-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .proof-icon.kpmg { background: #003087; color: white; font-size: 11px; font-weight: 900; letter-spacing: 1px; }
-    .proof-icon.ms   { background: #00a4ef; color: white; font-size: 11px; font-weight: 900; }
-    .proof-icon.yt   { background: #ff0000; color: white; font-size: 16px; }
-
-    /* ── ABOUT SECTION ───────────────────────────────────────── */
-    .about {
-      padding: 100px 0;
-      background: var(--bg-alt);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .about-photo {
-      background: linear-gradient(135deg, var(--blue-lt) 0%, #e0e7ff 100%);
-      border-radius: 20px;
-      aspect-ratio: 4/5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(0,85,255,0.1);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .about-photo .photo-placeholder-text {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--blue);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.6;
-    }
-
-    /* Replace .about-photo with this when you have a real photo:
-       <img src="justin.jpg" alt="Justin" style="width:100%;height:100%;object-fit:cover;"> */
-
-    .about-photo .accent-chip {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--black);
-      white-space: nowrap;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    }
-
-    .about-content h2 {
-      font-size: 42px;
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    .about-content p {
-      font-size: 17px;
-      color: var(--gray);
-      line-height: 1.75;
-      margin-bottom: 16px;
-    }
-
-    .about-content p strong { color: var(--black); font-weight: 700; }
-
-    .credentials {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .credential {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 18px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-
-    .credential-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .credential-text { font-size: 14px; font-weight: 600; color: var(--black); }
-    .credential-sub  { font-size: 12px; color: var(--gray); margin-top: 2px; }
-
-    /* ── WHAT YOU'LL LEARN ───────────────────────────────────── */
-    .learn {
-      padding: 100px 0;
-    }
-
-    .learn-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .learn-header h2 {
-      font-size: 42px;
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      margin-bottom: 16px;
-    }
-
-    .learn-header p {
-      font-size: 18px;
-      color: var(--gray);
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .pillar {
-      padding: 32px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      transition: all 0.2s;
-    }
-
-    .pillar:hover {
-      border-color: var(--blue);
-      box-shadow: 0 8px 32px rgba(0,85,255,0.08);
-      transform: translateY(-2px);
-    }
-
-    .pillar-icon {
-      width: 52px;
-      height: 52px;
-      background: var(--blue-lt);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
-    .pillar h3 {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-      margin-bottom: 10px;
-    }
-
-    .pillar p {
-      font-size: 15px;
-      color: var(--gray);
-      line-height: 1.65;
-    }
-
-    /* ── FREE KIT SECTION ────────────────────────────────────── */
-    .kit {
-      padding: 100px 0;
-      background: var(--black);
-      color: white;
-    }
-
-    .kit-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .kit-content .section-label { color: #60a5fa; }
-
-    .kit-content h2 {
-      font-size: 42px;
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    .kit-content p {
-      font-size: 17px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.75;
-      margin-bottom: 32px;
-    }
-
-    .kit-includes {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 36px;
-    }
-
-    .kit-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 15px;
-      color: rgba(255,255,255,0.8);
-    }
-
-    .kit-item .ki-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: rgba(0,85,255,0.3);
-      border: 1px solid rgba(0,85,255,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: #60a5fa;
-      flex-shrink: 0;
-      margin-top: 1px;
-      font-weight: 900;
-    }
-
-    .kit-mockup {
-      background: linear-gradient(135deg, #1a1a3e 0%, #0d1b3e 100%);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .kit-mockup::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(0,85,255,0.3) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .kit-mockup-title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #60a5fa;
-      margin-bottom: 24px;
-    }
-
-    .kit-tool {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
-      margin-bottom: 12px;
-    }
-
-    .kit-tool-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--blue), #7c3aed);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .kit-tool-name { font-size: 15px; font-weight: 700; color: white; }
-    .kit-tool-desc { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
-
-    .kit-cta-form {
-      display: flex;
-      gap: 12px;
-      margin-top: 0;
-    }
-
-    .kit-cta-form input {
-      flex: 1;
-      padding: 14px 18px;
-      border-radius: 8px;
-      border: 1.5px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.06);
-      color: white;
-      font-size: 15px;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .kit-cta-form input::placeholder { color: rgba(255,255,255,0.35); }
-    .kit-cta-form input:focus { border-color: var(--blue); }
-
-    .kit-cta-form button {
-      padding: 14px 24px;
-      background: var(--blue);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-
-    .kit-cta-form button:hover { background: #0044dd; }
-
-    /* ── LATEST VIDEOS ───────────────────────────────────────── */
-    .videos {
-      padding: 100px 0;
-      background: var(--bg-alt);
-    }
-
-    .videos-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 48px;
-    }
-
-    .videos-header h2 {
-      font-size: 36px;
-      font-weight: 900;
-      letter-spacing: -1.5px;
-    }
-
-    .videos-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .video-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: all 0.2s;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .video-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
-
-    .video-thumb {
-      aspect-ratio: 16/9;
-      background: linear-gradient(135deg, #0d1b3e, #1a1a3e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .video-thumb .yt-play {
-      width: 52px;
-      height: 52px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .video-thumb .video-label {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 4px;
-    }
-
-    .video-info {
-      padding: 20px;
-    }
-
-    .video-tag {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 8px;
-    }
-
-    .video-title {
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1.4;
-      letter-spacing: -0.2px;
-    }
-
-    .video-meta {
-      font-size: 13px;
-      color: var(--gray);
-      margin-top: 8px;
-    }
-
-    /* ── FINAL CTA ───────────────────────────────────────────── */
-    .final-cta {
-      padding: 100px 0;
-      text-align: center;
-    }
-
-    .final-cta h2 {
-      font-size: 52px;
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1.05;
-      margin-bottom: 20px;
-      max-width: 640px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .final-cta h2 .blue { color: var(--blue); }
-
-    .final-cta p {
-      font-size: 18px;
-      color: var(--gray);
-      margin-bottom: 40px;
-    }
-
-    .final-cta-form {
-      display: flex;
-      gap: 12px;
-      max-width: 460px;
-      margin: 0 auto;
-    }
-
-    .final-cta-form input {
-      flex: 1;
-      padding: 16px 20px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 15px;
-      font-family: inherit;
-      color: var(--black);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .final-cta-form input:focus { border-color: var(--blue); }
-
-    .final-cta-form button {
-      padding: 16px 28px;
-      background: var(--blue);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .final-cta-form button:hover { background: #0044dd; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,85,255,0.25); }
-
-    /* ── FOOTER ──────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 48px 0;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-
-    .footer-logo {
-      font-size: 16px;
-      font-weight: 900;
-      color: var(--black);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
-
-    .footer-logo span { color: var(--blue); }
-
-    .footer-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--gray);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--black); }
-
-    .footer-copy {
-      font-size: 13px;
-      color: var(--gray);
-      width: 100%;
-    }
-
-    /* ── RESPONSIVE ──────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero { padding: 60px 0 48px; }
-      .about-grid, .kit-inner { grid-template-columns: 1fr; gap: 40px; }
-      .pillars { grid-template-columns: 1fr; }
-      .videos-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 40px; }
-      .final-cta h2 { font-size: 36px; }
-      .final-cta-form, .kit-cta-form { flex-direction: column; }
-      .about-photo { display: none; }
-    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --navy:#1E2761; --deep:#151A3D; --ice:#CADCFC; --blue:#3D6FD4;
+      --gold:#F2B544; --ink:#232A3D; --muted:#5A6275; --line:#E2E8F4; --bg:#F7F9FD; --white:#fff;
+      --radius:12px;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+    h1,h2,h3{line-height:1.15;font-weight:800;color:var(--navy)}
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px}
+    .narrow{max-width:760px;margin:0 auto;padding:0 24px}
+    .eyebrow{color:var(--gold);font-weight:800;letter-spacing:3px;font-size:13px;text-transform:uppercase}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:16px 30px;border-radius:8px;font-size:16px;font-weight:800;text-decoration:none;cursor:pointer;border:none;transition:transform .15s ease,box-shadow .15s ease}
+    .btn-primary{background:var(--gold);color:var(--deep);box-shadow:0 6px 18px rgba(242,181,68,.35)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(242,181,68,.45)}
+    .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(202,220,252,.5)}
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:50;background:rgba(21,26,61,.96);backdrop-filter:blur(8px)}
+    nav .container{display:flex;align-items:center;justify-content:space-between;height:66px}
+    .logo{color:#fff;font-weight:800;font-size:19px;text-decoration:none;letter-spacing:.3px}
+    .logo b{color:var(--gold)}
+    .navlinks{display:flex;align-items:center;gap:28px}
+    .navlinks a{color:var(--ice);text-decoration:none;font-size:15px;font-weight:600}
+    .navlinks a:hover{color:#fff}
+    .navlinks a.nav-cta{background:var(--gold);color:var(--deep);padding:9px 18px;border-radius:7px}
+    @media(max-width:720px){.navlinks a:not(.nav-cta){display:none}}
+
+    /* HERO */
+    .hero{background:var(--deep);color:#fff;position:relative;overflow:hidden;padding:88px 0 96px}
+    .hero .blob{position:absolute;border-radius:50%;background:var(--navy);opacity:.85}
+    .b1{width:520px;height:520px;top:-200px;right:-150px}
+    .b2{width:340px;height:340px;bottom:-160px;left:-120px;background:#232A57}
+    .hero .grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+    .hero h1{color:#fff;font-size:50px;margin:16px 0 18px}
+    .hero p.sub{font-size:20px;color:var(--ice);margin-bottom:28px}
+    .hero .badges{margin-top:22px;display:flex;gap:20px;flex-wrap:wrap;color:#9aa6c4;font-size:14px;font-weight:600}
+    .hero .badges span::before{content:"✓ ";color:var(--gold);font-weight:800}
+    /* hero form card */
+    .formcard{background:#fff;border-radius:16px;padding:30px 28px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+    .formcard h3{font-size:21px;margin-bottom:6px}
+    .formcard p{font-size:14px;color:var(--muted);margin-bottom:18px}
+    .signup{display:flex;flex-direction:column;gap:12px}
+    .signup input{padding:15px 16px;border-radius:8px;border:1.5px solid var(--line);font-size:15px;font-family:inherit}
+    .signup input:focus{outline:none;border-color:var(--blue)}
+    .signup .btn{justify-content:center}
+    .consent{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
+    @media(max-width:840px){.hero .grid{grid-template-columns:1fr;gap:36px}.hero h1{font-size:38px}}
+
+    /* PROOF BAR */
+    .proof{background:var(--navy);color:var(--ice);padding:18px 0}
+    .proof .container{display:flex;flex-wrap:wrap;gap:14px 40px;justify-content:center;font-size:14px;font-weight:600}
+    .proof b{color:#fff}
+
+    section{padding:84px 0}
+    .alt{background:var(--bg)}
+    h2.center{text-align:center;font-size:34px;margin-bottom:14px}
+    .sec-sub{text-align:center;color:var(--muted);font-size:17px;max-width:600px;margin:0 auto 48px}
+
+    /* ABOUT */
+    .about{display:grid;grid-template-columns:300px 1fr;gap:46px;align-items:center}
+    .about img{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(30,39,97,.18)}
+    .about h2{font-size:32px;margin-bottom:8px}
+    .about .eyebrow{margin-bottom:10px;display:block}
+    .about p{font-size:17px;color:#384055;margin-bottom:14px}
+    @media(max-width:780px){.about{grid-template-columns:1fr;text-align:left}.about img{max-width:260px}}
+
+    /* LADDER */
+    .ladder{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+    .rung{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+    .rung .n{flex:0 0 92px;background:var(--navy);color:var(--gold);font-size:30px;font-weight:800;display:flex;align-items:center;justify-content:center}
+    .rung .body{padding:16px 22px}
+    .rung .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;color:#fff;padding:3px 9px;border-radius:4px;margin-bottom:6px}
+    .rung h3{font-size:18px;margin-bottom:3px}
+    .rung p{font-size:14px;color:var(--muted)}
+
+    /* LEARN CARDS */
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px 26px;transition:transform .15s ease,box-shadow .15s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(30,39,97,.1)}
+    .card .ic{width:50px;height:50px;border-radius:12px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;margin-bottom:16px}
+    .card h3{font-size:19px;margin-bottom:8px}
+    .card p{font-size:15px;color:var(--muted)}
+    @media(max-width:840px){.grid3{grid-template-columns:1fr}}
+
+    /* MID CTA / GUIDE */
+    .guide{background:var(--navy);color:#fff;border-radius:18px;padding:54px 44px;position:relative;overflow:hidden}
+    .guide .gblob{position:absolute;width:320px;height:320px;border-radius:50%;background:#262F66;top:-120px;right:-90px}
+    .guide>*{position:relative;z-index:2}
+    .guide h2{color:#fff;font-size:30px;margin-bottom:14px;max-width:620px}
+    .guide ul{list-style:none;margin:18px 0 26px;max-width:620px}
+    .guide li{padding-left:30px;position:relative;margin-bottom:12px;font-size:16px;color:var(--ice)}
+    .guide li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:800}
+
+    /* VIDEOS */
+    .vids{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .vid{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
+    .vid:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(30,39,97,.1)}
+    .vid .thumb{height:150px;background:linear-gradient(135deg,var(--navy),var(--deep));display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:40px}
+    .vid .vbody{padding:18px 20px}
+    .vid .kicker{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--blue);text-transform:uppercase}
+    .vid h3{font-size:16px;margin:6px 0 4px;color:var(--navy)}
+    .vid span{font-size:13px;color:var(--muted)}
+    @media(max-width:840px){.vids{grid-template-columns:1fr}}
+
+    /* FINAL */
+    .final{background:var(--deep);color:#fff;text-align:center;padding:90px 0}
+    .final h2{color:#fff;font-size:38px;margin-bottom:14px}
+    .final p{color:var(--ice);font-size:19px;margin-bottom:32px}
+
+    footer{background:#0F1330;color:#7b85a8;padding:40px 0}
+    footer .container{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center}
+    footer a{color:var(--ice);text-decoration:none;font-weight:600;margin-left:22px}
+    footer a:hover{color:var(--gold)}
+    .fcopy{font-size:14px}
   </style>
 </head>
 <body>
 
-  <!-- ── NAV ───────────────────────────────────────────────── -->
-  <nav>
-    <div class="container nav-inner">
-      <a href="#" class="nav-logo">AI with <span>Justin</span></a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#learn">What You'll Learn</a></li>
-        <li><a href="https://youtube.com/@AIwithJustin" target="_blank">YouTube</a></li>
-        <li><a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></li>
-      </ul>
-      <a href="#kit" class="btn btn-primary nav-cta">Free AI Starter Kit</a>
+<nav>
+  <div class="container">
+    <a href="#" class="logo">AI with <b>Justin</b></a>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#learn">What You'll Learn</a>
+      <a href="https://youtube.com/@AIwithJustin" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://linkedin.com/in/aiwithjustin" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#get" class="nav-cta">Free Guide</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- ── HERO ──────────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        Microsoft Certified AI Engineer · Enterprise Consultant
+<!-- HERO -->
+<header class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="eyebrow">Microsoft Certified AI Engineer · Marine Veteran</div>
+        <h1>Go from AI-curious to AI-capable.</h1>
+        <p class="sub">You don't need to be an expert. You need to climb. Get the free 4-rung field guide — plain English, every prompt included — and start using AI for real work this week.</p>
+        <a href="#get" class="btn btn-primary">Get the free guide →</a>
+        <div class="badges"><span>No fluff</span><span>10-minute read</span><span>Unsubscribe anytime</span></div>
       </div>
-      <h1>Enterprise AI, Made <span class="blue">Simple</span> for Your Business</h1>
-      <p>Learn how to use AI tools like Claude Code and OpenClaw to save 10+ hours a week — no technical background needed.</p>
-
-      <div class="capture-box">
-        <div class="capture-title">Get the Free AI Starter Kit</div>
-        <div class="capture-sub">
-          The <strong>5 AI tools</strong> I'd give every solopreneur to save 10 hours/week — sent straight to your inbox.
-        </div>
-
-        <form class="email-form subscribe-form">
-          <input type="text" placeholder="First name" autocomplete="given-name">
-          <input type="email" placeholder="Your email address" required autocomplete="email">
-          <button type="submit">Send Me the Free Kit →</button>
-          <p class="form-message"></p>
+      <div class="formcard" id="get">
+        <h3>Get the free guide</h3>
+        <p>Enter your email and I'll send it over right now.</p>
+        <form class="signup" id="ml-hero" method="post"
+              action="https://assets.mailerlite.com/jsonp/2392456/forms/188924552892384277/subscribe">
+          <input type="email" name="fields[email]" placeholder="you@work.com" required aria-label="Email address">
+          <button type="submit" class="btn btn-primary">Send me the guide →</button>
         </form>
-
-        <div class="capture-privacy">No spam, ever. Unsubscribe in one click.</div>
-
-        <div class="magnets">
-          <div class="magnet-item">
-            <div class="check">✓</div>
-            5 tools breakdown
-          </div>
-          <div class="magnet-item">
-            <div class="check">✓</div>
-            Setup guides
-          </div>
-          <div class="magnet-item">
-            <div class="check">✓</div>
-            Weekly AI tips
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── PROOF BAR ──────────────────────────────────────────── -->
-  <div class="proof-bar">
-    <div class="container">
-      <div class="proof-bar-inner">
-        <div class="proof-item">
-          <div class="proof-icon ms" style="background:#0a0a1a;font-size:16px;">🏢</div>
-          Enterprise Technology Consultant
-        </div>
-        <div class="proof-item">
-          <div class="proof-icon ms">AI</div>
-          Microsoft Certified AI Engineer
-        </div>
-        <div class="proof-item">
-          <div class="proof-icon yt">▶</div>
-          Practical tutorials for non-technical founders
-        </div>
+        <p class="consent">You'll also get my weekly note on building with AI. No spam, unsubscribe in one click.</p>
       </div>
     </div>
   </div>
+</header>
 
-  <!-- ── ABOUT ──────────────────────────────────────────────── -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-photo">
-          <img src="images/justin.jpg" alt="Justin" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:20px;">
-          <div class="accent-chip">
-            👋 Hey, I'm Justin
-          </div>
-        </div>
+<div class="proof">
+  <div class="container">
+    <span><b>Microsoft Certified</b> AI Engineer</span>
+    <span><b>Enterprise</b> technology consultant</span>
+    <span><b>U.S. Marine</b> veteran</span>
+    <span>Builds AI <b>in public</b></span>
+  </div>
+</div>
 
-        <div class="about-content">
-          <span class="section-label">About Justin</span>
-          <h2>The translator between enterprise AI and your business</h2>
-          <p>
-            I work in enterprise technology consulting on cutting-edge AI and data solutions for some of the world's largest organizations. I'm also a <strong>Microsoft Certified AI Engineer</strong>.
-          </p>
-          <p>
-            But here's what I kept seeing: the same powerful tools being used at the enterprise level — tools that could save small business owners and solopreneurs <strong>hours every single week</strong> — were sitting unused because nobody explained them in plain English.
-          </p>
-          <p>
-            So I built this channel to be the bridge. No jargon. No hype. Just practical walkthroughs that work for real businesses.
-          </p>
-
-          <div class="credentials">
-            <div class="credential">
-              <div class="credential-icon" style="background:#0a0a1a;font-size:18px;">🏢</div>
-              <div>
-                <div class="credential-text">Enterprise Technology Consultant</div>
-                <div class="credential-sub">AI & Data — cutting-edge enterprise AI solutions</div>
-              </div>
-            </div>
-            <div class="credential">
-              <div class="credential-icon" style="background:#00a4ef;font-size:13px;font-weight:900;color:white;">MS</div>
-              <div>
-                <div class="credential-text">Microsoft Certified: AI Engineer Associate</div>
-                <div class="credential-sub">Azure AI solutions &amp; cognitive services</div>
-              </div>
-            </div>
-            <div class="credential">
-              <div class="credential-icon" style="background:#ff0000;font-size:16px;">▶</div>
-              <div>
-                <div class="credential-text">AI with Justin — YouTube</div>
-                <div class="credential-sub">Practical AI tutorials for small business owners</div>
-              </div>
-            </div>
-          </div>
-        </div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about">
+      <img src="/images/justin.jpg" alt="Justin Thompson, AI engineer and Marine veteran">
+      <div>
+        <span class="eyebrow">👋 Hey, I'm Justin</span>
+        <h2>The translator between enterprise AI and your business</h2>
+        <p>I work in enterprise technology consulting on cutting-edge AI solutions for some of the world's largest organizations, and I'm a Microsoft Certified AI Engineer. Before that, I served eight years in the Marine Corps — which taught me discipline, ownership, and how to stay calm while learning hard things fast.</p>
+        <p>Here's what I kept seeing: the same powerful tools used at the enterprise level — tools that could save business owners hours every week — sitting unused because nobody explained them in plain English.</p>
+        <p>So I built this to be the bridge. No jargon. No hype. Just practical walkthroughs that prove a simple idea: <strong>if you can experiment, you can build.</strong></p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── WHAT YOU'LL LEARN ──────────────────────────────────── -->
-  <section class="learn" id="learn">
-    <div class="container">
-      <div class="learn-header">
-        <span class="section-label">What You'll Learn</span>
-        <h2>AI that actually works for your business</h2>
-        <p>No theory. No hype. Just tools and workflows you can use this week.</p>
-      </div>
-
-      <div class="pillars">
-        <div class="pillar">
-          <div class="pillar-icon">⚡</div>
-          <h3>Get Started Fast</h3>
-          <p>Step-by-step walkthroughs for setting up Claude Code, OpenClaw, and other AI tools — even if you've never written a line of code.</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">⏱️</div>
-          <h3>Save 10+ Hours a Week</h3>
-          <p>Real workflows for automating emails, proposals, customer support, content creation, and admin work that's eating your time.</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">🏢</div>
-          <h3>Enterprise Insights, Simplified</h3>
-          <p>What Fortune 500 companies are doing with AI — translated into practical strategies you can implement in your business today.</p>
-        </div>
-      </div>
+<!-- LADDER -->
+<section class="alt">
+  <div class="container">
+    <h2 class="center">The 4 rungs from "curious" to "capable"</h2>
+    <p class="sec-sub">Most people get stuck on rung 2 — not because it's hard, but because nobody showed them the next step. The free guide is that step.</p>
+    <div class="ladder">
+      <div class="rung"><div class="n">1</div><div class="body"><span class="tag" style="background:#8893a8">AWARE</span><h3>You've heard of it</h3><p>You know AI matters. You haven't used it for your own work yet.</p></div></div>
+      <div class="rung"><div class="n">2</div><div class="body"><span class="tag" style="background:#3D6FD4">CURIOUS</span><h3>You've poked at it</h3><p>You've tried ChatGPT a few times. It felt impressive but random.</p></div></div>
+      <div class="rung"><div class="n">3</div><div class="body"><span class="tag" style="background:#2E8B57">CAPABLE</span><h3>You use it daily</h3><p>AI is part of your real workflow. This is the goal for almost everyone.</p></div></div>
+      <div class="rung"><div class="n">4</div><div class="body"><span class="tag" style="background:#B8860B">CREATOR</span><h3>You build with it</h3><p>You assemble small tools and agents that do the work for you.</p></div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── FREE KIT ───────────────────────────────────────────── -->
-  <section class="kit" id="kit">
-    <div class="container">
-      <div class="kit-inner">
-        <div class="kit-content">
-          <span class="section-label">Free Resource</span>
-          <h2>The AI Starter Kit</h2>
-          <p>
-            The 5 AI tools I'd give every solopreneur — with setup guides and the exact workflows I use to save 10+ hours a week.
-          </p>
-
-          <div class="kit-includes">
-            <div class="kit-item">
-              <div class="ki-icon">✓</div>
-              The 5 tools ranked by time saved (with honest trade-offs)
-            </div>
-            <div class="kit-item">
-              <div class="ki-icon">✓</div>
-              Step-by-step setup for each tool — zero tech background required
-            </div>
-            <div class="kit-item">
-              <div class="ki-icon">✓</div>
-              Copy-paste prompts that work for emails, proposals &amp; content
-            </div>
-            <div class="kit-item">
-              <div class="ki-icon">✓</div>
-              The one AI workflow I wish I'd started with on day one
-            </div>
-          </div>
-
-          <form class="kit-cta-form subscribe-form">
-            <input type="email" placeholder="Your email address" required>
-            <button type="submit">Get It Free →</button>
-            <p class="form-message"></p>
-          </form>
-        </div>
-
-        <div class="kit-mockup">
-          <div class="kit-mockup-title">Inside the AI Starter Kit</div>
-
-          <div class="kit-tool">
-            <div class="kit-tool-icon">🤖</div>
-            <div>
-              <div class="kit-tool-name">Claude (Anthropic)</div>
-              <div class="kit-tool-desc">The AI assistant that actually reasons — best for writing, analysis &amp; complex tasks</div>
-            </div>
-          </div>
-
-          <div class="kit-tool">
-            <div class="kit-tool-icon">💻</div>
-            <div>
-              <div class="kit-tool-name">Claude Code</div>
-              <div class="kit-tool-desc">Build tools, automations &amp; websites with AI — no coding experience needed</div>
-            </div>
-          </div>
-
-          <div class="kit-tool">
-            <div class="kit-tool-icon">🦅</div>
-            <div>
-              <div class="kit-tool-name">OpenClaw</div>
-              <div class="kit-tool-desc">AI that browses the web and takes action on your behalf</div>
-            </div>
-          </div>
-
-          <div class="kit-tool">
-            <div class="kit-tool-icon">⚡</div>
-            <div>
-              <div class="kit-tool-name">+ 2 More Tools</div>
-              <div class="kit-tool-desc">Inside the free kit — specific to your business type</div>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- LEARN -->
+<section id="learn">
+  <div class="container">
+    <h2 class="center">AI that actually works for your business</h2>
+    <p class="sec-sub">No theory. No hype. Just tools and workflows you can use this week.</p>
+    <div class="grid3">
+      <div class="card"><div class="ic">⚡</div><h3>Get started fast</h3><p>Step-by-step walkthroughs for setting up Claude, Claude Code, and other AI tools — even if you've never written a line of code.</p></div>
+      <div class="card"><div class="ic">⏱️</div><h3>Save 10+ hours a week</h3><p>Real workflows for automating emails, proposals, support, content, and the admin work that's eating your time.</p></div>
+      <div class="card"><div class="ic">🏢</div><h3>Enterprise insights, simplified</h3><p>What large organizations are doing with AI — translated into practical strategies you can use in your business today.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── LATEST VIDEOS ──────────────────────────────────────── -->
-  <section class="videos" id="videos">
-    <div class="container">
-      <div class="videos-header">
-        <div>
-          <span class="section-label">Latest Videos</span>
-          <h2>Start watching</h2>
-        </div>
-        <a href="https://youtube.com/@AIwithJustin" target="_blank" class="btn btn-secondary">View All →</a>
-      </div>
-
-      <div class="videos-grid">
-        <!--
-          REPLACE THESE CARDS with real YouTube embeds or links as you publish.
-          For each video: update href, video-label, video-tag, video-title, video-meta
-        -->
-        <a href="https://youtube.com/@AIwithJustin" target="_blank" class="video-card">
-          <div class="video-thumb">
-            <div class="yt-play">▶</div>
-            <div class="video-label">Getting Started</div>
-          </div>
-          <div class="video-info">
-            <div class="video-tag">Claude Code</div>
-            <div class="video-title">I'm Not Technical — Should I Use Claude Code? (Honest Answer)</div>
-            <div class="video-meta">Coming soon</div>
-          </div>
-        </a>
-
-        <a href="https://youtube.com/@AIwithJustin" target="_blank" class="video-card">
-          <div class="video-thumb">
-            <div class="yt-play">▶</div>
-            <div class="video-label">Productivity</div>
-          </div>
-          <div class="video-info">
-            <div class="video-tag">Workflows</div>
-            <div class="video-title">How I Saved 10 Hours/Week Using AI in My Business (Step by Step)</div>
-            <div class="video-meta">Coming soon</div>
-          </div>
-        </a>
-
-        <a href="https://youtube.com/@AIwithJustin" target="_blank" class="video-card">
-          <div class="video-thumb">
-            <div class="yt-play">▶</div>
-            <div class="video-label">Tool Breakdown</div>
-          </div>
-          <div class="video-info">
-            <div class="video-tag">OpenClaw</div>
-            <div class="video-title">OpenClaw Explained in Plain English — What It Actually Does</div>
-            <div class="video-meta">Coming soon</div>
-          </div>
-        </a>
-      </div>
+<!-- GUIDE CTA -->
+<section class="alt">
+  <div class="narrow">
+    <div class="guide" id="guide">
+      <div class="gblob"></div>
+      <span class="eyebrow">Free field guide</span>
+      <h2>AI-Curious to AI-Capable</h2>
+      <ul>
+        <li>The 4-rung ladder — see where you are and the exact next move</li>
+        <li>The one question that unlocks any AI tool when you're stuck</li>
+        <li>Steal-these prompts by role: tax/finance, sales, HR, and ops</li>
+        <li>The 5-minute daily habit that turns "curious" into "capable"</li>
+      </ul>
+      <a href="#get" class="btn btn-primary">Get it free →</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── FINAL CTA ──────────────────────────────────────────── -->
-  <section class="final-cta">
-    <div class="container">
-      <span class="section-label">Get Started</span>
-      <h2>Stop doing it <span class="blue">manually</span>.</h2>
-      <p>Join thousands of solopreneurs learning to work smarter with AI.</p>
-
-      <form class="final-cta-form subscribe-form">
-        <input type="email" placeholder="Enter your email" required>
-        <button type="submit">Get the Free Kit →</button>
-        <p class="form-message"></p>
-      </form>
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="container">
+    <h2 class="center">Start watching</h2>
+    <p class="sec-sub">Practical AI tutorials for people who'd rather build than wait.</p>
+    <div class="vids">
+      <a class="vid" href="https://youtube.com/@AIwithJustin" target="_blank" rel="noopener"><div class="thumb">▶</div><div class="vbody"><div class="kicker">Getting started</div><h3>I'm not technical — should I use Claude Code?</h3><span>Watch on YouTube</span></div></a>
+      <a class="vid" href="https://youtube.com/@AIwithJustin" target="_blank" rel="noopener"><div class="thumb">▶</div><div class="vbody"><div class="kicker">Productivity</div><h3>How I saved 10 hours/week using AI (step by step)</h3><span>Watch on YouTube</span></div></a>
+      <a class="vid" href="https://youtube.com/@AIwithJustin" target="_blank" rel="noopener"><div class="thumb">▶</div><div class="vbody"><div class="kicker">Build in public</div><h3>I built a working app from the gym in 30 minutes</h3><span>Watch on YouTube</span></div></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── FOOTER ─────────────────────────────────────────────── -->
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <a href="#" class="footer-logo">AI with <span>Justin</span></a>
-        <ul class="footer-links">
-          <li><a href="https://youtube.com/@AIwithJustin" target="_blank">YouTube</a></li>
-          <li><a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></li>
-          <li><a href="mailto:hello@aiwithjt.com">Contact</a></li>
-        </ul>
-        <div class="footer-copy">
-          © 2026 AI with Justin · <a href="#" style="color:inherit;">Privacy Policy</a>
-        </div>
-      </div>
+<!-- FINAL -->
+<section class="final">
+  <div class="narrow">
+    <h2>Which rung are you on right now?</h2>
+    <p>Grab the free guide, find your rung, and take the next step today.</p>
+    <a href="#get" class="btn btn-primary">Get the free guide →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="fcopy">© <span id="yr"></span> AI with Justin · aiwithjt.com</div>
+    <div>
+      <a href="https://youtube.com/@AIwithJustin" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://linkedin.com/in/aiwithjustin" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:hello@aiwithjt.com">Contact</a>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    document.querySelectorAll('.subscribe-form').forEach(form => {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const emailInput = form.querySelector('input[type="email"]');
-        const nameInput  = form.querySelector('input[type="text"]');
-        const messageEl  = form.querySelector('.form-message');
-        const button     = form.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
-
-        button.disabled = true;
-        button.textContent = 'Subscribing...';
-        messageEl.textContent = '';
-
-        try {
-          const payload = { email: emailInput.value };
-          if (nameInput && nameInput.value) payload.first_name = nameInput.value;
-
-          const res  = await fetch('/api/subscribe', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-
-          const data = await res.json();
-
-          if (res.ok) {
-            messageEl.textContent = '✓ Check your inbox for the Starter Kit!';
-            messageEl.style.color = '#059669';
-            form.reset();
-          } else {
-            throw new Error(data.error || 'Something went wrong — please try again.');
-          }
-        } catch (err) {
-          messageEl.textContent = err.message;
-          messageEl.style.color = '#dc2626';
-        } finally {
-          button.disabled = false;
-          button.textContent = originalText;
-        }
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  document.querySelectorAll('form.signup').forEach(function(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var data = new FormData(form);
+      fetch(form.action, { method:'POST', body:data, mode:'no-cors' }).finally(function(){
+        var card = form.closest('.formcard');
+        if(card){
+          card.querySelector('h3').textContent = "You're in. Check your inbox ✉";
+          card.querySelector('p').textContent = "The guide is on its way — look for an email from justin@aiwithjt.com.";
+          form.style.display='none';
+          var c = card.querySelector('.consent'); if(c) c.style.display='none';
+        } else { form.innerHTML = "<p style='color:#fff'>You're in — check your inbox ✉</p>"; }
       });
     });
-  </script>
-
+  });
+</script>
 </body>
 </html>
